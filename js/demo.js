@@ -10,6 +10,27 @@
  * 邮件内容说明：用简明的语言描述问题所在，并交代清楚遇到该问题的场景，可附上截屏图片，微信团队会尽快处理你的反馈。
  */
 wx.ready(function () {
+  
+  document.querySelector('#checkDeviceApi').onclick = function () {
+    WeixinJSBridge.invoke('configWXDeviceWiFi', {}, function(res){
+      WeixinJSBridge.log(res.err_msg);
+      WeixinJSBridge.log(res.desc);
+      if( res.err_msg == "configWXDeviceWiFi:ok")
+      {
+        alert("Ok!");
+      }
+      else if( res.err_msg == "configWXDeviceWiFi:cancel")
+      {
+        alert("Cancle!");
+      }
+      else
+      {
+        alert("res.err_msg : " + res.err_msg + "\n\nres.desc : " + res.desc);
+      }
+    });
+  };
+
+
   // 1 判断当前版本是否支持指定 JS 接口，支持批量判断
   document.querySelector('#checkJsApi').onclick = function () {
     wx.checkJsApi({
